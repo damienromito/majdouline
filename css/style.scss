@@ -1,0 +1,50 @@
+
+@font-face {
+  font-family: 'Didot';
+  src: url(../fonts/Didot/Didot-Bold.eot);
+  src: url(../fonts/Didot/Didot-Bold.eot?#iefix) format("eot"), url(../fonts/Didot/Didot-Bold.woff) format("woff"), url(../fonts/Didot/Didot-Bold.ttf) format("truetype"), url(../fonts/Didot/Didot-Bold.svg#Didot-Bold) format("svg");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url(../fonts/Helvetica/helvlight_regular-webfont.eot);
+  src: url(../fonts/Helvetica/helvlight_regular-webfont.eot?#iefix) format("eot"), url(../fonts/Helvetica/helvlight_regular-webfont.woff) format("woff"), url(../fonts/Helvetica/helvlight_regular-webfont.ttf) format("truetype"), url(../fonts/Helvetica/helvlight_regular-webfont.svg#helvlight_regular-webfont) format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+
+body {
+  background: white;
+  font-family: Helvetica;
+  font-size: 16px;
+  color: black;
+ }
+
+ .container {width:780px; margin: 0 auto}
+
+ header{
+   background:white;
+   padding:20px;
+   h1{float:left; font-family:"Didot"; font-weight:bold;font-size:24px}
+   ul{float: right;}
+   li{float:left; margin:0 20px}
+   a{text-decoration:none; color: black;}
+ }
+
+ #imartdirector{
+   margin:20px 0 0 0;
+   background:url(../images/imartdirector.png);
+   width:706px;
+   height:213px;
+ }
+
+
+  #content .photo {
+    background-attachment: fixed;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    height: 900px;
+    position: relative; }
+  #content .photo.responsive {
+    background-size: cover; }
