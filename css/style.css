@@ -7,43 +7,73 @@
 
 @font-face {
   font-family: 'Helvetica';
-  src: url(../fonts/Helvetica/helvlight_regular-webfont.eot);
-  src: url(../fonts/Helvetica/helvlight_regular-webfont.eot?#iefix) format("eot"), url(../fonts/Helvetica/helvlight_regular-webfont.woff) format("woff"), url(../fonts/Helvetica/helvlight_regular-webfont.ttf) format("truetype"), url(../fonts/Helvetica/helvlight_regular-webfont.svg#helvlight_regular-webfont) format("svg");
+  src: url(../fonts/Helvetica/Helvetica.eot);
+  src: url(../fonts/Helvetica/Helvetica.eot?#iefix) format("eot"), url(../fonts/Helvetica/Helvetica.woff) format("woff"), url(../fonts/Helvetica/Helvetica.ttf) format("truetype"), url(../fonts/Helvetica/Helvetica.svg#helvlight_regular-webfont) format("svg");
   font-weight: normal;
   font-style: normal; }
 
+html {
+  overflow-y: scroll; }
+
 body {
+  overflow: hidden !important;
   background: white;
   font-family: Helvetica;
   font-size: 16px;
   color: black; }
 
 .container {
-  width: 780px;
+  width: 820px;
   margin: 0 auto; }
 
 header {
   background: white;
-  padding: 20px; }
+  width: 100%; }
   header h1 {
     float: left;
     font-family: "Didot";
     font-weight: bold;
-    font-size: 24px; }
+    font-size: 24px;
+    margin: 22px 0 0  42px; }
   header ul {
-    float: right; }
+    float: right;
+    margin: 27px 16px 0 0; }
   header li {
     float: left;
-    margin: 0 20px; }
+    margin: 0 50px 0 0; }
   header a {
     text-decoration: none;
     color: black; }
+  header a:hover {
+    text-decoration: underline; }
+  header .right {
+    left: 50%;
+    margin-left: 410px; }
+  header .left {
+    background: red;
+    right: 50%;
+    margin-right: 410px; }
+  header .right, header .left {
+    top: 0;
+    position: absolute;
+    z-index: 2;
+    height: 212px;
+    width: 100px;
+    background: white;
+    width: -webkit-calc(50% - 410px);
+    width: calc(50% - 410px); }
 
 #imartdirector {
-  margin: 20px 0 0 0;
+  position: relative;
+  margin: 22px 0 0 0;
   background: url(../images/imartdirector.png);
-  width: 706px;
-  height: 213px; }
+  width: 820px;
+  height: 213px;
+  z-index: 1; }
+
+#workspace {
+  margin-top: -150px;
+  z-index: 0; }
 
 #content .photo {
   background-attachment: fixed;
@@ -54,3 +84,17 @@ header {
 
 #content .photo.responsive {
   background-size: cover; }
+
+#image_workspace {
+  background: url(../images/workspace.jpg); }
+
+#image_workspace_blur {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -ms-filter: blur(2px);
+  -o-filter: blur(2px);
+  filter: blur(2px);
+  background: url(../images/workspace.jpg); }
+
+#portfolio ul {
+  position: absolute; }

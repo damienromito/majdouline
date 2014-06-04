@@ -1,3 +1,15 @@
+@mixin calc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+@mixin filter($filter-type,$filter-amount) {
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+  -o-filter: $filter-type+unquote('(#{$filter-amount})');
+  filter: $filter-type+unquote('(#{$filter-amount})');
+}
 
 @font-face {
   font-family: 'Didot';
@@ -8,43 +20,92 @@
 
 @font-face {
   font-family: 'Helvetica';
-  src: url(../fonts/Helvetica/helvlight_regular-webfont.eot);
-  src: url(../fonts/Helvetica/helvlight_regular-webfont.eot?#iefix) format("eot"), url(../fonts/Helvetica/helvlight_regular-webfont.woff) format("woff"), url(../fonts/Helvetica/helvlight_regular-webfont.ttf) format("truetype"), url(../fonts/Helvetica/helvlight_regular-webfont.svg#helvlight_regular-webfont) format("svg");
+  src: url(../fonts/Helvetica/Helvetica.eot);
+  src: url(../fonts/Helvetica/Helvetica.eot?#iefix) format("eot"), url(../fonts/Helvetica/Helvetica.woff) format("woff"), url(../fonts/Helvetica/Helvetica.ttf) format("truetype"), url(../fonts/Helvetica/Helvetica.svg#helvlight_regular-webfont) format("svg");
   font-weight: normal;
   font-style: normal; }
 
-
+html{
+  overflow-y:scroll;
+}
 body {
+  overflow: hidden !important;
   background: white;
   font-family: Helvetica;
   font-size: 16px;
   color: black;
  }
 
- .container {width:780px; margin: 0 auto}
+ .container {width:820px; margin: 0 auto}
 
  header{
    background:white;
-   padding:20px;
-   h1{float:left; font-family:"Didot"; font-weight:bold;font-size:24px}
-   ul{float: right;}
-   li{float:left; margin:0 20px}
+   h1{float:left; font-family:"Didot"; font-weight:bold;font-size:24px; margin:22px 0 0  42px}
+   ul{float: right;margin:27px 16px 0 0}
+   li{float:left;margin:0 50px 0 0}
    a{text-decoration:none; color: black;}
+   a:hover{text-decoration:underline;}
+   width:100%;
+
+   .right{
+     left: 50%;
+     margin-left: 410px;
+
+   }
+   .left{
+     background:red;
+     right: 50%;
+     margin-right: 410px;
+   }
+   .right,.left{
+     top:0;
+     position:absolute;
+     z-index:2;
+     height:212px;
+     width:100px;
+     background:white;
+     @include calc(width, "50% - 410px");
+
+   }
  }
 
  #imartdirector{
-   margin:20px 0 0 0;
+   position:relative;
+   margin:22px 0 0 0;
    background:url(../images/imartdirector.png);
-   width:706px;
+   width:820px;
    height:213px;
+   z-index:1;
  }
 
+#workspace
+{
+  margin-top:-150px;
+  z-index:0;
+}
 
-  #content .photo {
-    background-attachment: fixed;
-    background-position: 50% 0;
-    background-repeat: no-repeat;
-    height: 900px;
-    position: relative; }
-  #content .photo.responsive {
-    background-size: cover; }
+#content .photo {
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  height: 900px;
+  position: relative;
+}
+
+#content .photo.responsive {
+  background-size: cover;
+}
+
+#image_workspace{
+  background:url(../images/workspace.jpg);
+}
+
+#image_workspace_blur{
+  @include filter(blur,2px);
+  background:url(../images/workspace.jpg);
+}
+
+#portfolio
+{
+  ul{position:absolute}
+}
