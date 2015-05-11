@@ -26,31 +26,112 @@ body {
   width: 820px;
   margin: 0 auto; }
 
-header {
+#overlay {
+  display: none;
+  cursor: pointer;
+  position: fixed;
+  pointer-events: none;
   background: white;
-  width: 100%; }
-  header h1 {
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -ms-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear; }
+  #overlay .container {
+    width: 100%;
+    overflow: scroll;
+    height: 100%;
+    text-align: center; }
+    #overlay .container ::-webkit-scrollbar {
+      display: none; }
+    #overlay .container img {
+      margin: 30px 0;
+      display: inline-block;
+      cursor: auto; }
+  #overlay .left {
+    right: 50%;
+    margin-right: 410px; }
+  #overlay .right {
+    left: 50%;
+    margin-left: 410px; }
+  #overlay .right, #overlay .left {
+    top: 0;
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100px;
+    width: -webkit-calc(50% - 410px);
+    width: calc(50% - 410px); }
+
+html.overlayvisible {
+  overflow: hidden;
+  height: 100%; }
+  html.overlayvisible body {
+    overflow: hidden;
+    height: 100%; }
+  html.overlayvisible #overlay {
+    display: block;
+    pointer-events: auto; }
+
+#w_logos img {
+  display: inline-block;
+  margin: 150px 0 !important; }
+#w_logos h3 {
+  margin-bottom: 150px; }
+
+#w_sofitel img {
+  border: 10px solid #eee; }
+
+#navbar {
+  width: 100%;
+  z-index: 6;
+  position: fixed; }
+  #navbar h1 {
     float: left;
     font-family: "Didot";
     font-weight: bold;
     font-size: 24px;
-    margin: 22px 0 0  42px; }
-  header ul {
+    margin: 22px 0 0 65px; }
+  #navbar h1 a:hover {
+    text-decoration: none; }
+  #navbar ul {
     float: right;
     margin: 27px 16px 0 0; }
-  header li {
+  #navbar li {
     float: left;
-    margin: 0 50px 0 0; }
-  header a {
+    margin: 0 30px 0 0; }
+  #navbar a {
     text-decoration: none;
-    color: black; }
-  header a:hover {
+    color: black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  #navbar a:hover {
     text-decoration: underline; }
+  #navbar .printidentity li:nth-child(1) a {
+    text-decoration: underline; }
+  #navbar .artofmaking li:nth-child(2) a {
+    text-decoration: underline; }
+  #navbar .digital li:nth-child(3) a {
+    text-decoration: underline; }
+  #navbar .contact li:nth-child(4) a {
+    text-decoration: underline; }
+
+header {
+  background: white;
+  width: 100%;
+  padding-top: 46px; }
   header .right {
     left: 50%;
     margin-left: 410px; }
   header .left {
-    background: red;
     right: 50%;
     margin-right: 410px; }
   header .right, header .left {
@@ -63,38 +144,203 @@ header {
     width: -webkit-calc(50% - 410px);
     width: calc(50% - 410px); }
 
+header.fixed {
+  position: fixed;
+  height: 50px;
+  z-index: 1; }
+
+#content .section {
+  height: 500px; }
+
+#content .photo, #content .photo_blur {
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  height: 200%;
+  width: 100%;
+  position: absolute;
+  background-size: cover;
+  /*@include transition (all, 0.6s, ease)
+  */ }
+
+#content .photo.responsive, #content .responsive.photo_blur {
+  background-size: cover; }
+
+#content .photo_blur {
+  opacity: 0; }
+
+.blur .photo {
+  /*  // -webkit-animation: blur_over 0.5s;
+    // @include filter(blur,3px);
+  
+  @include filter(grayscale,90%);
+  */ }
+
+.projects {
+  overflow: hidden; }
+  .projects .margin {
+    display: inline-block;
+    height: -webkit-calc(75% - 220px);
+    height: calc(75% - 220px); }
+  .projects .container {
+    position: relative; }
+  .projects li {
+    background: transparent;
+    float: left;
+    width: 170px;
+    height: 170px;
+    margin: 38px 45px 28px 0;
+    -webkit-filter: grayscale(90%);
+    -moz-filter: grayscale(90%);
+    -ms-filter: grayscale(90%);
+    -o-filter: grayscale(90%);
+    filter: grayscale(90%);
+    -webkit-transition: all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -ms-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
+    transition: all 0.6s ease; }
+    .projects li a {
+      display: block;
+      width: 100%;
+      height: 100%; }
+  .projects li:hover {
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    -ms-filter: grayscale(0%);
+    -o-filter: grayscale(0%);
+    filter: grayscale(0%); }
+  .projects .column2 {
+    width: 400px; }
+    .projects .column2 li:nth-child(2n) {
+      margin-right: 0px; }
+  .projects .column3 {
+    width: 600px; }
+    .projects .column3 li:nth-child(3n) {
+      margin-right: 0px; }
+  .projects .column4 li:nth-child(4n) {
+    margin-right: 0px; }
+
+.project h2 {
+  font-size: 46px;
+  margin: 60px 0 0 0; }
+.project h3 {
+  font-size: 24px;
+  margin: 20px 0 20px 0;
+  font-weight: normal; }
+
+/************** SECTIONS *********************/
 #imartdirector {
   position: relative;
   margin: 22px 0 0 0;
-  background: url(../images/imartdirector.png);
+  background-image: url(../images/imartdirector.png);
   width: 820px;
   height: 213px;
   z-index: 1; }
 
-#workspace {
+#workspace .photo {
+  background-image: url(../images/workspace1.jpg); }
+
+#printidentity {
   margin-top: -150px;
   z-index: 0; }
+  #printidentity .photo {
+    background-image: url(../images/workspace1.jpg); }
+  #printidentity .photo_blur {
+    background-image: url(../images/workspace1_blur.jpg); }
 
-#content .photo {
-  background-attachment: fixed;
-  background-position: 50% 0;
-  background-repeat: no-repeat;
-  height: 900px;
-  position: relative; }
+#artofmaking .photo {
+  background-image: url(../images/workspace2.jpg); }
+#artofmaking .photo_blur {
+  background-image: url(../images/workspace2_blur.jpg); }
 
-#content .photo.responsive {
-  background-size: cover; }
+#digital .photo {
+  background-image: url(../images/workspace3.jpg); }
+#digital .photo_blur {
+  background-image: url(../images/workspace3_blur.jpg); }
 
-#image_workspace {
-  background: url(../images/workspace.jpg); }
+#contact {
+  text-align: center; }
+  #contact .photo {
+    background-image: url(../images/phone.jpg);
+    height: 100%; }
+  #contact .margin {
+    display: inline-block;
+    height: -webkit-calc(50%);
+    height: calc(50%); }
+  #contact ul {
+    margin: 0 auto 25px auto;
+    width: 415px; }
+  #contact li {
+    cursor: pointer;
+    width: 73px;
+    height: 73px;
+    float: left;
+    background-image: url(../images/social.png);
+    overflow: hidden;
+    margin: 0 15px;
+    -webkit-transition: margin-top 0.2s linear;
+    -moz-transition: margin-top 0.2s linear;
+    -ms-transition: margin-top 0.2s linear;
+    -o-transition: margin-top 0.2s linear;
+    transition: margin-top 0.2s linear; }
+    #contact li a {
+      display: block;
+      width: 100%;
+      height: 100%; }
+  #contact li:hover {
+    margin-top: -10px; }
 
-#image_workspace_blur {
-  -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -ms-filter: blur(2px);
-  -o-filter: blur(2px);
-  filter: blur(2px);
-  background: url(../images/workspace.jpg); }
+#linkedin {
+  background-position: 221px 0; }
 
-#portfolio ul {
-  position: absolute; }
+#instagram {
+  background-position: 147px 0; }
+
+#tumblr {
+  background-position: 73px 0; }
+
+#t_sofitel {
+  background: url(../images/t_sofitel.png); }
+
+#t_jld {
+  background: url(../images/t_jld.png); }
+
+#t_logos {
+  background: url(../images/t_logos.jpg); }
+
+#t_candv {
+  background: url(../images/t_candv.jpg); }
+
+#t_wedemain {
+  background: url(../images/t_wedemain.jpg); }
+
+#t_confitures {
+  background: url(../images/t_confitures.jpg); }
+
+#t_missionmarket {
+  background: url(../images/t_missionmarket.jpg); }
+
+#t_converse {
+  background: url(../images/t_converse.jpg); }
+
+#t_tea {
+  background: url(../images/t_tea.jpg); }
+
+#t_olive {
+  background: url(../images/t_olive.jpg); }
+
+#t_simply {
+  background: url(../images/t_simply.jpg); }
+
+#t_col {
+  background: url(../images/t_col.jpg); }
+
+#t_sumi {
+  background: url(../images/t_sumi.jpg); }
+
+#t_yachts {
+  background: url(../images/t_yachts.jpg); }
+
+#t_printrip {
+  background: url(../images/t_printrip.jpg); }

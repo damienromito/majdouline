@@ -1,3 +1,5 @@
+//@import animate;
+
 @mixin calc($property, $expression) {
   #{$property}: -webkit-calc(#{$expression});
   #{$property}: calc(#{$expression});
@@ -9,6 +11,22 @@
   -ms-filter: $filter-type+unquote('(#{$filter-amount})');
   -o-filter: $filter-type+unquote('(#{$filter-amount})');
   filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+@mixin blur($px: 0) {
+    -webkit-filter: blur(#{$px}px) !important;
+    -ms-filter: blur(#{$px}px) !important;
+    -moz-filter: blur(#{$px}px) !important;
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'blur\'><feGaussianBlur stdDeviation=\'#{$px}\' /></filter></svg>#blur");
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='#{$px}');
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
 }
 
 @font-face {
@@ -36,24 +54,116 @@ body {
   color: black;
  }
 
- .container {width:820px; margin: 0 auto}
+.container {width:820px; margin: 0 auto}
+
+
+/////////////// OVERLAY //////////////////
+
+
+#overlay
+{
+  display:none;
+  cursor:pointer;
+  position:fixed;
+  pointer-events: none;
+  background:rgba(255,255,255,1);
+  width:100%;
+  height:100%;
+  z-index: 100;
+  @include transition(opacity, 0.3s, linear);
+  .container{
+    width:100%;
+    overflow:scroll;
+    ::-webkit-scrollbar {
+    display: none;
+}
+    height:100%;
+    text-align:center;
+    img{margin:30px 0; display:inline-block;  cursor:auto;}
+
+  }
+  .left{
+    right: 50%;
+    margin-right: 410px;
+  }
+  .right{
+    left: 50%;
+    margin-left: 410px;
+
+  }
+  .right,.left{
+    top:0;
+    cursor:pointer;
+    position:absolute;
+    z-index:2;
+    height:100%;
+    width:100px;
+    @include calc(width, "50% - 410px");
+
+  }
+
+
+}
+
+html.overlayvisible
+{
+  overflow:hidden;
+  height:100%;
+  body{overflow:hidden;
+  height:100%;}
+  #overlay{
+    display:block;
+    pointer-events: auto;
+  }
+
+}
+
+#w_logos{
+  img{display:inline-block; margin: 150px 0 !important}
+  h3{margin-bottom: 150px}
+}
+#w_sofitel{
+  img{border:10px solid #eee}
+}
+/////// NAVBAR  /////////
+
+#navbar
+{
+  width:100%;
+  z-index:6;
+  position:fixed;
+  h1{float:left; font-family:"Didot"; font-weight:bold;font-size:24px; margin:22px 0 0 65px}
+  h1 a:hover{text-decoration:none}
+  ul{float: right;margin:27px 16px 0 0}
+  li{float:left;margin:0 30px 0 0}
+  a{
+    text-decoration:none; color: black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  a:hover{text-decoration:underline;}
+
+  .printidentity li:nth-child(1) a,{text-decoration:underline}
+  .artofmaking li:nth-child(2) a,{text-decoration:underline}
+  .digital li:nth-child(3) a {text-decoration:underline}
+  .contact li:nth-child(4) a,{text-decoration:underline}
+
+}
 
  header{
    background:white;
-   h1{float:left; font-family:"Didot"; font-weight:bold;font-size:24px; margin:22px 0 0  42px}
-   ul{float: right;margin:27px 16px 0 0}
-   li{float:left;margin:0 50px 0 0}
-   a{text-decoration:none; color: black;}
-   a:hover{text-decoration:underline;}
    width:100%;
-
+   padding-top:46px;
    .right{
      left: 50%;
      margin-left: 410px;
 
    }
    .left{
-     background:red;
      right: 50%;
      margin-right: 410px;
    }
@@ -65,47 +175,201 @@ body {
      width:100px;
      background:white;
      @include calc(width, "50% - 410px");
-
    }
  }
+header.fixed{
+  position: fixed;
+  height: 50px;
+  z-index: 1;
+}
+
+
+#content .section{
+  height:500px;
+}
+
+#content .photo , #content .photo_blur {
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  height: 200%;
+  width:100%;
+  position: absolute;
+  background-size:cover;
+
+
+/*@include transition (all, 0.6s, ease)
+*/
+}
+
+#content .photo.responsive, #content .responsive.photo_blur {
+  background-size: cover;
+}
+
+#content .photo_blur{
+  opacity: 0;
+}
+
+.blur .photo{
+/*  // -webkit-animation: blur_over 0.5s;
+  // @include filter(blur,3px);
+
+@include filter(grayscale,90%);
+*/
+}
+
+
+.projects
+{
+  overflow:hidden;
+  .margin{
+    display:inline-block;
+    @include calc(height, "75% - 220px");
+    }
+  .container{
+    position: relative;
+  }
+
+  li{
+    background:transparent;
+    float:left;
+    width:170px;
+    height:170px;
+    margin:38px 45px 28px 0;
+    a{display:block;width:100%;height:100%}
+    @include filter(grayscale,90%);
+
+    @include transition (all, 0.6s, ease)
+
+  }
+  li:hover { @include filter(grayscale,0%);}
+
+  .column2{
+      width:400px;
+      li:nth-child(2n)
+      {
+        margin-right:0px;
+      }
+  }
+  .column3{
+      width:600px;
+
+      li:nth-child(3n)
+      {
+        margin-right:0px;
+      }
+  }
+
+  .column4{
+      li:nth-child(4n)
+      {
+        margin-right:0px;
+      }
+  }
+
+
+
+}
+
+.project{
+  h2{font-size: 46px; margin: 60px 0 0 0}
+  h3{font-size: 24px; margin: 20px 0 20px 0; font-weight: normal;}
+}
+
+/************** SECTIONS *********************/
 
  #imartdirector{
    position:relative;
    margin:22px 0 0 0;
-   background:url(../images/imartdirector.png);
+   background-image:url(../images/imartdirector.png);
    width:820px;
    height:213px;
    z-index:1;
  }
 
+
+
+
 #workspace
+{
+
+  .photo {   background-image:url(../images/workspace1.jpg);}
+}
+
+#printidentity
 {
   margin-top:-150px;
   z-index:0;
+  .photo{ background-image:url(../images/workspace1.jpg); }
+  .photo_blur{ background-image:url(../images/workspace1_blur.jpg); }
 }
 
-#content .photo {
-  background-attachment: fixed;
-  background-position: 50% 0;
-  background-repeat: no-repeat;
-  height: 900px;
-  position: relative;
-}
-
-#content .photo.responsive {
-  background-size: cover;
-}
-
-#image_workspace{
-  background:url(../images/workspace.jpg);
-}
-
-#image_workspace_blur{
-  @include filter(blur,2px);
-  background:url(../images/workspace.jpg);
-}
-
-#portfolio
+#artofmaking
 {
-  ul{position:absolute}
+  .photo{ background-image:url(../images/workspace2.jpg); }
+  .photo_blur{ background-image:url(../images/workspace2_blur.jpg); }
+
 }
+
+
+#digital
+{
+  .photo{ background-image:url(../images/workspace3.jpg); }
+  .photo_blur{ background-image:url(../images/workspace3_blur.jpg); }
+
+}
+
+
+#contact
+{
+  .photo{ background-image:url(../images/phone.jpg); height: 100%}
+
+  text-align:center;
+  .margin{
+    display:inline-block;
+    @include calc(height, "50%");
+    }
+  ul{margin:0 auto 25px auto; width: 415px}
+  li{
+    cursor:pointer;
+    width:73px;
+    height:73px;
+    float:left;
+    background-image:url(../images/social.png);
+    overflow:hidden;
+    margin: 0 15px;
+    @include transition(margin-top, 0.2s, linear);
+    a{display:block;width:100%; height:100%}
+  }
+  li:hover{
+    margin-top:-10px;
+  }
+
+}
+
+
+#linkedin{background-position:221px 0}
+#instagram{background-position:147px 0}
+#tumblr{background-position:73px 0}
+
+
+
+/////////////// WORKS //////////////////
+
+#t_sofitel{background:url(../images/t_sofitel.png); }
+
+#t_jld{background:url(../images/t_jld.png);}
+#t_logos{background:url(../images/t_logos.jpg);}
+#t_candv{background:url(../images/t_candv.jpg);}
+#t_wedemain{background:url(../images/t_wedemain.jpg);}
+#t_confitures{background:url(../images/t_confitures.jpg);}
+#t_missionmarket{background:url(../images/t_missionmarket.jpg);}
+#t_converse{background:url(../images/t_converse.jpg);}
+#t_tea{background:url(../images/t_tea.jpg);}
+#t_olive{background:url(../images/t_olive.jpg);}
+#t_simply{background:url(../images/t_simply.jpg);}
+#t_col{background:url(../images/t_col.jpg);}
+#t_sumi{background:url(../images/t_sumi.jpg);}
+
+#t_yachts{background:url(../images/t_yachts.jpg);}
+#t_printrip{background:url(../images/t_printrip.jpg);}

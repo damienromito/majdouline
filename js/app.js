@@ -8,92 +8,168 @@
 
   app = (function() {
     "use strict";
-    var arlesPosition, bnpPosition, boilerPosition, headerFixed, init, natumPosition, ocoPosition, onefeatPosition, resetPosition, the_id, tweetPosition;
-    headerFixed = onefeatPosition = natumPosition = tweetPosition = boilerPosition = bnpPosition = ocoPosition = arlesPosition = the_id = 0;
+    var artofmakingPosition ,printidentityPosition, digitalPosition, contactPosition, init, resetPosition, the_id,isHovered,sideMargin ;
+    artofmakingPosition ,printidentityPosition, digitalPosition,contactPosition,sideMargin = 0;
+
     init = function() {
-      $.stellar({
-        horizontalScrolling: false,
-        verticalOffset: 0
-      });
+      // $.stellar({
+      //   horizontalScrolling: false,
+      //   verticalOffset: 0
+      // });
+
       resetPosition();
+
       $(window).resize(function() {
         resetPosition();
       });
-      $("#fake_header .about, #fake_header .what").click(function(e) {
-        e.preventDefault();
+
+      $('#navbar a[href^="#"]').click(function() {
         the_id = $(this).attr("href");
-        $('.collapsible.description').addClass('open');
-        setTimeout(function() {
-          $('html, body').animate({
-            scrollTop: $(the_id).offset().top
-          }, '500');
-          resetPosition();
-        }, 500);
-        return false;
-      });
-      $('a[href^="#"]').click(function() {
-        the_id = $(this).attr("href");
-        if (the_id === "#aboutme" || the_id === "#whatiknow") {
-          return false;
-        }
+        console.log(the_id);
         $('html, body').animate({
-          scrollTop: $(the_id).offset().top - 70
+          scrollTop: $(the_id).offset().top + window.innerHeight
         }, '500');
         return false;
       });
+
+      $(".projects a").click(function(event){
+        $("html").addClass('overlayvisible');
+        var id = $(this).attr('data-id');
+        $("#overlay .project").hide();
+
+        var elem = $("#overlay").find("#"+id);
+        elem.show();
+        elem.parent('.container').scrollTop(0);
+        event.preventDefault();
+        return false;
+      });
+
+    //  var delay=300, setTimeoutConst;
+      // $(".projects a").mouseover(function(){
+      // //  setTimeoutConst = setTimeout(function(){
+      //     $("#content").addClass("blur");
+      //   //}, delay);
+      //   //$("#content").addClass("blur");
+      // }).mouseout(function(){
+
+      //   $("#content").removeClass("blur");
+      // //  clearTimeout(setTimeoutConst );
+      // });
+
+      //OVERLAY BLUR
+      $("#overlay").click(function(){
+
+          if(!isHovered)
+          {
+            $("html").removeClass('overlayvisible');
+            $(this).removeClass('closable');
+            $(this).removeClass('blur');
+
+          }
+
+
+      });
+
+      // $("#overlay").mousemove(function(e){
+      //   if(e.clientX < sideMargin || e.clientX > (sideMargin + 800)){
+      //     $("#overlay").addClass('blur');
+      //   }else{
+      //     $("#overlay").removeClass('blur');
+      //   }
+      // });
+
+      // $('#overlay img').hover(function()
+      // {
+      //   isHovered = true;
+      //   $("#overlay").removeClass('closable blur');
+      // }, function(e){
+      //   isHovered = false;
+      //   $("#overlay").addClass('closable');
+      // });
+
+      // $("#overlay").mouseover(function(){
+      //     if($("#overlay img").hover())
+      //     {
+      //       console.log('hover');
+      //         $("#overlay").removeClass('blur');
+      //     }else
+      //     {
+      //       console.log('out');
+      //       $("#overlay").addClass('blur');
+      //     }
+      // });
+
       $('.collapsible').click(function() {
         $(this).toggleClass('open');
         setTimeout(function() {
           resetPosition();
         }, 500);
       });
+
+
       $(document).scroll(function() {
-        var projectsPosition, scroll;
-        scroll = $(document).scrollTop();
-        projectsPosition = $("#projects").position();
-        if (scroll < projectsPosition.top) {
-          if (headerFixed === true) {
-            $("#projects").attr('class', '');
-            $("#header .active").removeClass("active");
-            headerFixed = false;
-          }
-        } else {
-          headerFixed = true;
-          $("#projects").addClass("fixed");
-          scroll = scroll + 100;
-          if (scroll > bnpPosition.top) {
-            $("#projects").attr("class", "fixed bnp");
-          } else if (scroll > tweetPosition.top) {
-            $("#projects").attr("class", "fixed tweet");
-          } else if (scroll > boilerPosition.top) {
-            $("#projects").attr("class", "fixed boiler");
-          } else if (scroll > arlesPosition.top) {
-            $("#projects").attr("class", "fixed arles");
-          } else if (scroll > ocoPosition.top) {
-            $("#projects").attr("class", "fixed oco");
-          } else if (scroll > natumPosition.top) {
-            $("#projects").attr("class", "fixed natum");
-          } else if (scroll > onefeatPosition.top) {
-            $("#projects").attr("class", "fixed onefeat");
-          }
+
+        var ratioAlpha = 0;
+        var scroll = $(document).scrollTop() + 100;
+        if (scroll > contactPosition.top) {
+          $("#navbar ul").attr("class", "contact");
+
+        } else if (scroll >  digitalPosition.top) {
+          $("#navbar ul").attr("class", "digital");
+
+          ratioAlpha = (scroll - digitalPosition.top) / window.innerHeight;
+          $("#digital .photo_blur").css("opacity",ratioAlpha);
+
+        } else if (scroll >  artofmakingPosition.top) {
+          $("#navbar ul").attr("class", "artofmaking");
+
+          ratioAlpha = (scroll - artofmakingPosition.top) / window.innerHeight;
+          $("#artofmaking .photo_blur").css("opacity",ratioAlpha);
+          $("#digital .photo_blur").css("opacity",0);
+
+        } else if (scroll >  printidentityPosition.top) {
+          $("#navbar ul").attr("class", "printidentity");
+     
+          ratioAlpha = (scroll - printidentityPosition.top) /  window.innerHeight;
+          $("#printidentity .photo_blur").css("opacity",ratioAlpha);
+          $("#artofmaking .photo_blur").css("opacity",0);
+
+        }else
+        {
+          $("#printidentity .photo_blur").css("opacity",0);
+          $("#navbar ul").attr("class", "");
         }
+
+
       });
+
+  
+  
+
     };
     resetPosition = function() {
-      $('#projects .photo').height(window.innerWidth / 1.6);
+      sideMargin = (window.innerWidth -800) / 2;
+      var minHeight = 470*2;
+      if(window.innerHeight*2 > minHeight)
+      {
+        $('#content .projects').height(window.innerHeight*2);
+      }else
+      {
+        $('#content .projects').height(minHeight);
+      }
+
       if (window.innerWidth > 1600 || window.innerWidth < 800) {
         $('#projects .photo').addClass('responsive');
       } else {
         $('#projects .responsive').removeClass('responsive');
       }
-      $.stellar('refresh');
-      onefeatPosition = $("#onefeat").position();
-      natumPosition = $("#natum").position();
-      arlesPosition = $("#arles").position();
-      tweetPosition = $("#tweet").position();
-      ocoPosition = $("#oco").position();
-      bnpPosition = $("#bnp").position();
-      boilerPosition = $("#boiler").position();
+      // $.stellar('refresh');
+
+      printidentityPosition = $("#printidentity").position();
+      artofmakingPosition = $("#artofmaking").position();
+      digitalPosition = $("#digital").position();
+      contactPosition = $("#contact").position();
+
     };
     return {
       init: init
