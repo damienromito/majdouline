@@ -329,7 +329,7 @@ header.fixed{
     display:inline-block;
     @include calc(height, "50%");
     }
-  ul{margin:0 auto 25px auto; width: 415px}
+  ul{margin:0 auto 25px auto; width: 465px}
   li{
     cursor:pointer;
     width:73px;
@@ -337,7 +337,7 @@ header.fixed{
     float:left;
     background-image:url(../images/social.png);
     overflow:hidden;
-    margin: 0 15px;
+    margin: 0 10px;
     @include transition(margin-top, 0.2s, linear);
     a{display:block;width:100%; height:100%}
   }
@@ -348,9 +348,10 @@ header.fixed{
 }
 
 
-#linkedin{background-position:221px 0}
-#instagram{background-position:147px 0}
-#tumblr{background-position:73px 0}
+#linkedin{background-position:296px 0}
+#instagram{background-position:222px 0}
+#tumblr{background-position:148px 0}
+#houzz{background-position:74px 0}
 
 
 
@@ -359,6 +360,12 @@ header.fixed{
 #t_sofitel{background:url(../images/t_sofitel.png); }
 
 #t_jld{background:url(../images/t_jld.png);}
+#t_ladouceur{background:url(../images/t_ladouceur.jpg);}
+#t_amap{background:url(../images/t_amap.jpg);}
+
+#t_puy{background:url(../images/t_puy.jpg);}
+#t_marais{background:url(../images/t_marais.jpg);}
+
 #t_logos{background:url(../images/t_logos.jpg);}
 #t_candv{background:url(../images/t_candv.jpg);}
 #t_wedemain{background:url(../images/t_wedemain.jpg);}

@@ -270,7 +270,7 @@ header.fixed {
     height: calc(50%); }
   #contact ul {
     margin: 0 auto 25px auto;
-    width: 415px; }
+    width: 465px; }
   #contact li {
     cursor: pointer;
     width: 73px;
@@ -278,7 +278,7 @@ header.fixed {
     float: left;
     background-image: url(../images/social.png);
     overflow: hidden;
-    margin: 0 15px;
+    margin: 0 10px;
     -webkit-transition: margin-top 0.2s linear;
     -moz-transition: margin-top 0.2s linear;
     -ms-transition: margin-top 0.2s linear;
@@ -292,19 +292,34 @@ header.fixed {
     margin-top: -10px; }
 
 #linkedin {
-  background-position: 221px 0; }
+  background-position: 296px 0; }
 
 #instagram {
-  background-position: 147px 0; }
+  background-position: 222px 0; }
 
 #tumblr {
-  background-position: 73px 0; }
+  background-position: 148px 0; }
+
+#houzz {
+  background-position: 74px 0; }
 
 #t_sofitel {
   background: url(../images/t_sofitel.png); }
 
 #t_jld {
   background: url(../images/t_jld.png); }
+
+#t_ladouceur {
+  background: url(../images/t_ladouceur.jpg); }
+
+#t_amap {
+  background: url(../images/t_amap.jpg); }
+
+#t_puy {
+  background: url(../images/t_puy.jpg); }
+
+#t_marais {
+  background: url(../images/t_marais.jpg); }
 
 #t_logos {
   background: url(../images/t_logos.jpg); }
